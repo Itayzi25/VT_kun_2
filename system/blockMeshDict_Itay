@@ -1,0 +1,240 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2106                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale   1.0;
+
+
+xmin   0;
+xmax   0.005;
+xmax1 -0.005;
+ymin   0;
+ymax   0.005;
+ymax1   -0.005;
+zmin   0;
+zmax   0.09;
+zmid   0.088;
+zcold  0.1;
+zcells     25;
+ycells     25;
+xcells     25; 
+zcells1     35;
+ycells1     35;
+xcells1     35;
+x2 0.0106;
+y2 0.0106;
+x21 -0.0106;
+y21 -0.0106;
+x22 0.007;
+y22 0.007;
+x212 -0.007;
+y212 -0.007;
+y21 -0.0106;
+x23 0.007;
+y23 0.007;
+x213 -0.007;
+y213 -0.007;
+x3  0.0168;
+y3  0.0168;
+x31 -0.0168;
+y31 -0.0168;
+x4   0.002;
+x41  -0.002;
+x5   0.00565;
+x51  -0.00565;
+y4   0.002;
+y41  -0.002;
+y5   0.00565;
+y51  -0.00565;
+radius 0.015;
+radius1 -0.015;
+radius2 0.01;
+radius12 -0.01;
+bigradius 0.0238;
+bigradius1 -0.0238;
+coldradius 0.008;
+coldradius1 -0.008;
+
+vertices
+(
+//BLOCK0
+    ($xmax1 $ymax1 $zmin) //0
+    ($xmax1 $ymax $zmin) //1
+    ($xmax1 $ymax1 $zmax) //2
+    ($xmax1 $ymax $zmax) //3
+    ($x21 $y21 $zmin) //4
+    ($x21 $y2  $zmin) //5
+    ($x212 $y212 $zmax) //6
+    ($x212  $y22  $zmax) //7
+//Block1
+    ($xmax $ymax1 $zmin) //8
+    ($xmax $ymax $zmin) //9
+    ($xmax $ymax1 $zmax) //10
+    ($xmax $ymax $zmax) //11
+    ($x2 $y21 $zmin) //12
+    ($x2 $y2  $zmin) //13
+    ($x22  $y212 $zmax) //14
+    ($x22  $y22  $zmax) //15
+//BLOCK5
+    ($x31 $y31 $zmid) //16
+    ($x31 $y3  $zmid) //17
+    ($x31 $y31 $zmax) //18
+    ($x31 $y3  $zmax) //19
+    ($x213 $y213 $zmid) //20
+    ($x213 $y23 $zmid) //21
+    ($x213 $y213 $zmax) //22
+    ($x213 $y23 $zmax) //23
+//BLOCK6 
+    ($x3 $y31 $zmid) //24
+    ($x3 $y3  $zmid) //25
+    ($x3 $y31 $zmax) //26
+    ($x3 $y3  $zmax) //27
+    ($x23 $y213 $zmid) //28
+    ($x23 $y23 $zmid) //29
+    ($x23 $y213 $zmax) //30
+    ($x23 $y23 $zmax) //31
+//BLOCK9
+    ($x41 $y41 $zmax) //32
+    ($x41 $y4 $zmax) //33
+    ($x41 $y41 $zcold) //34
+    ($x41 $y4 $zcold) //35
+    ($x51 $y51 $zmax) //36
+    ($x51 $y5  $zmax) //37
+    ($x51 $y51 $zcold) //38
+    ($x51 $y5  $zcold) //39
+//Block10
+    ($x4 $y41 $zmax) //40
+    ($x4 $y4 $zmax) //41
+    ($x4 $y41 $zcold) //42
+    ($x4 $y4 $zcold) //43
+    ($x5 $y51 $zmax) //44
+    ($x5 $y5  $zmax) //45
+    ($x5 $y51 $zcold) //46
+    ($x5  $y5  $zcold) //47
+);
+
+blocks
+(
+//BLOCK0 right arc block
+    hex (3 2 6 7 1 0 4 5) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK1 left arc block
+    hex (11 15 14 10 9 13 12 8) ($xcells $ycells $zcells) simpleGrading (1 1 1)   
+//BLOCK2 bottom arc block
+    hex (2 10 14 6 0 8 12 4) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK3 upper arc block
+    hex (7 15 11 3 5 13 9 1) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK4 squre block 
+    hex (3 11 10 2 1 9 8 0) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK5 nuzllet right arc block
+    hex (18 19 23 22 16 17 21 20) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK6 nuzllet left arc block
+    hex (27 26 30 31 25 24 28 29) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK7 nuzllet bottom arc block
+    hex (26 18 22 30 24 16 20 28) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK8 nuzllet upper arc block
+    hex (25 17 21 29 27 19 23 31) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK9 cold right arc block
+    hex (35 34 38 39 33 32 36 37) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK10 cold left arc block
+    hex (43 47 46 42 41 45 44 40) ($xcells $ycells $zcells) simpleGrading (1 1 1)   
+//BLOCK11 bottom cold arc block
+    hex (34 42 46 38 32 40 44 36) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK12 cold upper arc block
+    hex (39 47 43 35 37 45 41 33) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK13 squre block cold 
+    hex (35 43 42 34 33 41 40 32) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+//BLOCK14 nuzllet squre block 
+    hex (23 31 30 22 21 29 28 20) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+);
+
+edges
+(
+//BLOCK0 arc
+arc 4 5 ($radius1 0 0) 
+arc 6 7 ($radius12 0 $zmax)
+//BLOCK1 arc
+arc 12 13 ($radius 0 0) 
+arc 14 15 ($radius2 0 $zmax)
+//BLOCK2 arc
+arc 4 12 (0 $radius1 0) 
+arc 6 14(0 $radius12 $zmax)
+//BLOCK3 arc
+arc 5 13 (0 $radius 0) 
+arc 7 15 (0 $radius2 $zmax)
+//BLOCK5 arc
+arc 18 19 ($bigradius1 0 $zmax)
+arc 16 17 ($bigradius1 0 $zmid)
+//Block6 arc
+arc 24 25 ($bigradius 0 $zmid)
+arc 26 27 ($bigradius 0 $zmax)
+//Block7 arc
+arc 18 26 (0 $bigradius1 $zmax)
+arc 16 24 (0 $bigradius1 $zmid)
+//Block8 arc
+arc 27 19 (0 $bigradius $zmax)
+arc 25 17 (0 $bigradius $zmid)
+//Block9 arc
+arc 36 37 ($coldradius1 0 $zmax) 
+arc 38 39 ($coldradius1 0 $zcold)
+//BLOCK10 arc
+arc 44 45 ($coldradius 0 $zmax) 
+arc 46 47 ($coldradius 0 $zcold)
+//BLOCK11 arc
+arc 36 44 (0 $coldradius1 $zmax) 
+arc 38 46 (0 $coldradius1 $zcold)
+//BLOCK12 arc
+arc 37 45 (0 $coldradius $zmax) 
+arc 39 47 (0 $coldradius $zcold)
+); 
+boundary
+(
+    INLET
+    {
+        type patch;
+        faces
+        (
+            (16 17 18 19)
+            (25 24 27 26)
+            (24 16 26 18)
+            (17 25 27 19)
+        );
+    }
+    COLDOUTLET 
+    {
+        type patch;
+        faces
+        (
+            (36 37 38 39)
+            (45 44 47 46)
+            (44 36 46 38)
+            (45 37 47 39)
+        );
+    }
+    HOTOUTLET 
+    {
+        type patch;
+        faces
+        (
+            (4 5 6 7)
+            (15 14 13 12)
+            (15 7 13 5)
+            (14 6 12 4)
+            
+        );
+    }
+);
+
+
+// ************************************************************************* //

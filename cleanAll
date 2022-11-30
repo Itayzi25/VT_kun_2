@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+rm -rf dynamicCode
+rm -rf constant/triSurface/VT5_nozzle_Itay.eMesh
+rm -rf constant/extendedFeatureEdgeMesh
+rm -rf constant/polyMesh
+
+rm -rf 0

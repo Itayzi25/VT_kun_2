@@ -1,0 +1,74 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+fluxScheme            Kurganov;
+
+ddtSchemes
+{
+    default           Euler;
+}
+
+gradSchemes
+{
+    default           none;
+    grad(rho)         Gauss linear;
+    grad(rhoU)        Gauss linear;
+    grad(rPsi)        Gauss linear;
+    grad(e)           Gauss linear;
+    grad(c)           Gauss linear;
+    grad(epsilon)     Gauss linear;
+    grad(k)           Gauss linear;
+    grad(U)           cellLimited Gauss linear 1;
+}
+
+divSchemes
+{
+    default           none;
+    div(tauMC)        Gauss linear;
+    div(phi,k)        Gauss upwind;
+    div(phi,epsilon)  Gauss upwind;
+}
+
+laplacianSchemes
+{
+    default                                none;
+    laplacian(muEff,U)                     Gauss linear corrected;
+    laplacian(alphaEff,e)                  Gauss linear corrected;
+    laplacian((rho*DepsilonEff),epsilon)   Gauss linear limited corrected 0.5;
+    laplacian((rho*DkEff),k)               Gauss linear limited corrected 0.5;
+}
+
+interpolationSchemes
+{
+    default                   none;
+    flux(rhoU)                linear;
+    dotInterpolate(S,tauMC)   linear;
+    interpolate(muEff)        linear;
+    interpolate(rho)          linear;
+    reconstruct(rho)          vanLeer;
+    reconstruct(U)            vanLeerV;
+    reconstruct(T)            vanLeer;
+}
+
+snGradSchemes
+{
+    default           none;
+    snGrad(U)         corrected;
+}
+
+
+// ************************************************************************* //

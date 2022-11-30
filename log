@@ -1,0 +1,166 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2106                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _c15bfde3cb-20210624 OPENFOAM=2106
+Arch   : "LSB;label=32;scalar=64"
+Exec   : vtRhoCentralFoam -parallel
+Date   : Nov 29 2022
+Time   : 17:10:02
+Host   : DESKTOP-V1BKQHM
+PID    : 10271
+I/O    : uncollated
+Case   : /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2
+nProcs : 8
+Hosts  :
+(
+    (DESKTOP-V1BKQHM 8)
+)
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Reading thermophysical properties
+
+Selecting thermodynamics package 
+{
+    type            hePsiThermo;
+    mixture         pureMixture;
+    transport       const;
+    thermo          hConst;
+    equationOfState perfectGas;
+    specie          specie;
+    energy          sensibleInternalEnergy;
+}
+
+[5] Reading field U
+
+
+[5] 
+[5] --> FOAM FATAL IO ERROR: (openfoam-2106)
+[5] Entry 'deltaTimeRamp' not found in dictionary "/home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor5/0/U.boundaryField.HOT"
+[5] 
+[5] 
+[5] file: /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor5/0/U.boundaryField.HOT at line 35 to 40.
+[5] 
+[5]     From const Foam::entry& Foam::dictionary::lookupEntry(const Foam::word&, Foam::keyType::option) const
+[5]     in file db/dictionary/dictionary.C at line 413.
+[5] 
+FOAM parallel run exiting
+[5] 
+[4] 
+[4] 
+[4] --> FOAM FATAL IO ERROR: (openfoam-2106)
+[4] Entry 'deltaTimeRamp' not found in dictionary "/home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor4/0/U.boundaryField.HOT"
+[4] 
+[4] 
+[4] file: /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor4/0/U.boundaryField.HOT at line 35 to 40.
+[4] 
+[4]     From const Foam::entry& Foam::dictionary::lookupEntry(const Foam::word&, Foam::keyType::option) const
+[4]     in file db/dictionary/dictionary.C at line 413.
+[4] 
+FOAM parallel run exiting
+[4] 
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 4 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+[7] 
+[7] 
+[7] --> FOAM FATAL IO ERROR: (openfoam-2106)
+[7] Entry 'deltaTimeRamp' not found in dictionary "/home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor7/0/U.boundaryField.HOT"
+[7] 
+[7] 
+[7] file: /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor7/0/U.boundaryField.HOT at line 35 to 40.
+[7] 
+[7]     From const Foam::entry& Foam::dictionary::lookupEntry(const Foam::word&, Foam::keyType::option) const
+[7]     in file db/dictionary/dictionary.C at line 413.
+[7] 
+FOAM parallel run exiting
+[7] 
+[0] 
+[0] 
+[0] --> FOAM FATAL IO ERROR: (openfoam-2106)
+[0] Entry 'deltaTimeRamp' not found in dictionary "/home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor0/0/U.boundaryField.HOT"
+[0] 
+[0] 
+[0] file: /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor0/0/U.boundaryField.HOT at line 35 to 40.[1] 
+[1] 
+[1] --> FOAM FATAL IO ERROR: (openfoam-2106)
+[1] Entry 'deltaTimeRamp' not found in dictionary "/home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor1/0/U.boundaryField.HOT"
+[1] 
+[1] 
+[1] file: /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor1/0/U.boundaryField.HOT at line 35 to 40.
+[1] 
+[1]     From const Foam::entry& Foam::dictionary::lookupEntry(const Foam::word&, Foam::keyType::option) const
+[1]     in file db/dictionary/dictionary.C at line 413.
+[1] 
+FOAM parallel run exiting
+[1] 
+[2] 
+[2] 
+[2] --> FOAM FATAL IO ERROR: (openfoam-2106)
+[2] Entry 'deltaTimeRamp' not found in dictionary "/home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor2/0/U.boundaryField.HOT"
+[2] 
+[2] 
+[2] file: /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor2/0/U.boundaryField.HOT at line 35 to 40.
+[2] 
+[2]     From const Foam::entry& Foam::dictionary::lookupEntry(const Foam::word&, Foam::keyType::option) const
+[2]     in file db/dictionary/dictionary.C at line 413.
+[2] 
+FOAM parallel run exiting
+[2] 
+[3] 
+[3] 
+[3] --> FOAM FATAL IO ERROR: (openfoam-2106)
+[3] Entry 'deltaTimeRamp' not found in dictionary "/home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor3/0/U.boundaryField.HOT"
+[3] 
+[3] 
+[3] file: /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor3/0/U.boundaryField.HOT at line 35 to 40.
+[3] 
+[3]     From const Foam::entry& Foam::dictionary::lookupEntry(const Foam::word&, Foam::keyType::option) const
+[3]     in file db/dictionary/dictionary.C at line 413.
+[3] 
+FOAM parallel run exiting
+[3] 
+
+[0] 
+[0]     From const Foam::entry& Foam::dictionary::lookupEntry(const Foam::word&, Foam::keyType::option) const
+[0]     in file db/dictionary/dictionary.C at line 413.
+[0] 
+FOAM parallel run exiting
+[0] 
+[6] 
+[6] 
+[6] --> FOAM FATAL IO ERROR: (openfoam-2106)
+[6] Entry 'deltaTimeRamp' not found in dictionary "/home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor6/0/U.boundaryField.HOT"
+[6] 
+[6] 
+[6] file: /home/itay_22/OpenFOAM/OpenFOAM-v2106/itay/run/VT_kun_2/processor6/0/U.boundaryField.HOT at line 35 to 40.
+[6] 
+[6]     From const Foam::entry& Foam::dictionary::lookupEntry(const Foam::word&, Foam::keyType::option) const
+[6]     in file db/dictionary/dictionary.C at line 413.
+[6] 
+FOAM parallel run exiting
+[6] 
+[DESKTOP-V1BKQHM:10267] PMIX ERROR: UNREACHABLE in file ../../../src/server/pmix_server.c at line 2193
+[DESKTOP-V1BKQHM:10267] PMIX ERROR: UNREACHABLE in file ../../../src/server/pmix_server.c at line 2193
+[DESKTOP-V1BKQHM:10267] 7 more processes have sent help message help-mpi-api.txt / mpi-abort
+[DESKTOP-V1BKQHM:10267] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages

@@ -1,0 +1,344 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2106                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale   1.0;
+
+
+// Dimensions
+Dcold     0.0098;
+Lcold     0.005;
+Rcold     #calc"0.5 * $Dcold";
+RcoldSq   #calc"0.5 * $Rcold";
+
+Dtube     0.0168;
+Dnozzle   0.024;
+Snozzle   0.003;
+Rtube     #calc"0.5 * $Dtube";
+Rnozzle   #calc"0.5 * $Dnozzle";
+
+coneAng   3.5;
+
+Ltube     0.168;
+Lhot      #calc"$Ltube + 0.005";
+RtubeHot  #calc"$Ltube * tan(0.5*$coneAng * M_PI / 180.0) + $Rtube";
+RcoldHot  #calc"0.8 * $Ltube * tan(0.5*$coneAng * M_PI / 180.0) + $Rcold";
+RhotSq    #calc"0.4 * $Ltube * tan(0.5*$coneAng * M_PI / 180.0) + $RcoldSq";
+
+
+// Grid params
+SqElem        9;
+RcoldElem     7;
+RtubeElem     7;
+RnozElem      7;
+LcoldElem     7;
+LnozzleElem   5;
+LtubeElem     150;
+LhotElem      8;
+
+
+vertices
+(
+
+// Cold section
+    ( #calc"-$RcoldSq*cos(M_PI/4.0)"     #calc"-$RcoldSq*cos(M_PI/4.0)"   #calc"-$Lcold" ) // 0
+    ( #calc" $RcoldSq*cos(M_PI/4.0)"     #calc"-$RcoldSq*cos(M_PI/4.0)"   #calc"-$Lcold" ) // 1
+    ( #calc" $RcoldSq*cos(M_PI/4.0)"     #calc" $RcoldSq*cos(M_PI/4.0)"   #calc"-$Lcold" ) // 2
+    ( #calc"-$RcoldSq*cos(M_PI/4.0)"     #calc" $RcoldSq*cos(M_PI/4.0)"   #calc"-$Lcold" ) // 3
+
+    ( #calc"-$Rcold*cos(M_PI/4.0)"       #calc"-$Rcold*cos(M_PI/4.0)"     #calc"-$Lcold" ) // 4
+    ( #calc" $Rcold*cos(M_PI/4.0)"       #calc"-$Rcold*cos(M_PI/4.0)"     #calc"-$Lcold" ) // 5
+    ( #calc" $Rcold*cos(M_PI/4.0)"       #calc" $Rcold*cos(M_PI/4.0)"     #calc"-$Lcold" ) // 6
+    ( #calc"-$Rcold*cos(M_PI/4.0)"       #calc" $Rcold*cos(M_PI/4.0)"     #calc"-$Lcold" ) // 7
+
+// Nozzle section 1st
+    ( #calc"-$RcoldSq*cos(M_PI/4.0)"     #calc"-$RcoldSq*cos(M_PI/4.0)"   0.0 ) // 8
+    ( #calc" $RcoldSq*cos(M_PI/4.0)"     #calc"-$RcoldSq*cos(M_PI/4.0)"   0.0 ) // 9
+    ( #calc" $RcoldSq*cos(M_PI/4.0)"     #calc" $RcoldSq*cos(M_PI/4.0)"   0.0 ) // 10
+    ( #calc"-$RcoldSq*cos(M_PI/4.0)"     #calc" $RcoldSq*cos(M_PI/4.0)"   0.0 ) // 11
+    
+    ( #calc"-$Rcold*cos(M_PI/4.0)"       #calc"-$Rcold*cos(M_PI/4.0)"     0.0 ) // 12
+    ( #calc" $Rcold*cos(M_PI/4.0)"       #calc"-$Rcold*cos(M_PI/4.0)"     0.0 ) // 13
+    ( #calc" $Rcold*cos(M_PI/4.0)"       #calc" $Rcold*cos(M_PI/4.0)"     0.0 ) // 14
+    ( #calc"-$Rcold*cos(M_PI/4.0)"       #calc" $Rcold*cos(M_PI/4.0)"     0.0 ) // 15
+
+    ( #calc"-$Rtube*cos(M_PI/4.0)"       #calc"-$Rtube*cos(M_PI/4.0)"     0.0 ) // 16
+    ( #calc" $Rtube*cos(M_PI/4.0)"       #calc"-$Rtube*cos(M_PI/4.0)"     0.0 ) // 17
+    ( #calc" $Rtube*cos(M_PI/4.0)"       #calc" $Rtube*cos(M_PI/4.0)"     0.0 ) // 18
+    ( #calc"-$Rtube*cos(M_PI/4.0)"       #calc" $Rtube*cos(M_PI/4.0)"     0.0 ) // 19
+    
+    ( #calc"-$Rnozzle*cos(M_PI/4.0)"     #calc"-$Rnozzle*cos(M_PI/4.0)"   0.0 ) // 20
+    ( #calc" $Rnozzle*cos(M_PI/4.0)"     #calc"-$Rnozzle*cos(M_PI/4.0)"   0.0 ) // 21
+    ( #calc" $Rnozzle*cos(M_PI/4.0)"     #calc" $Rnozzle*cos(M_PI/4.0)"   0.0 ) // 22
+    ( #calc"-$Rnozzle*cos(M_PI/4.0)"     #calc" $Rnozzle*cos(M_PI/4.0)"   0.0 ) // 23
+
+// Nozzle section 2nd
+    ( #calc"-$RcoldSq*cos(M_PI/4.0)"     #calc"-$RcoldSq*cos(M_PI/4.0)"   $Snozzle ) // 24
+    ( #calc" $RcoldSq*cos(M_PI/4.0)"     #calc"-$RcoldSq*cos(M_PI/4.0)"   $Snozzle ) // 25
+    ( #calc" $RcoldSq*cos(M_PI/4.0)"     #calc" $RcoldSq*cos(M_PI/4.0)"   $Snozzle ) // 26
+    ( #calc"-$RcoldSq*cos(M_PI/4.0)"     #calc" $RcoldSq*cos(M_PI/4.0)"   $Snozzle ) // 27
+    
+    ( #calc"-$Rcold*cos(M_PI/4.0)"       #calc"-$Rcold*cos(M_PI/4.0)"     $Snozzle ) // 28
+    ( #calc" $Rcold*cos(M_PI/4.0)"       #calc"-$Rcold*cos(M_PI/4.0)"     $Snozzle ) // 29
+    ( #calc" $Rcold*cos(M_PI/4.0)"       #calc" $Rcold*cos(M_PI/4.0)"     $Snozzle ) // 30
+    ( #calc"-$Rcold*cos(M_PI/4.0)"       #calc" $Rcold*cos(M_PI/4.0)"     $Snozzle ) // 31
+
+    ( #calc"-$Rtube*cos(M_PI/4.0)"       #calc"-$Rtube*cos(M_PI/4.0)"     $Snozzle ) // 32
+    ( #calc" $Rtube*cos(M_PI/4.0)"       #calc"-$Rtube*cos(M_PI/4.0)"     $Snozzle ) // 33
+    ( #calc" $Rtube*cos(M_PI/4.0)"       #calc" $Rtube*cos(M_PI/4.0)"     $Snozzle ) // 34
+    ( #calc"-$Rtube*cos(M_PI/4.0)"       #calc" $Rtube*cos(M_PI/4.0)"     $Snozzle ) // 35
+    
+    ( #calc"-$Rnozzle*cos(M_PI/4.0)"     #calc"-$Rnozzle*cos(M_PI/4.0)"   $Snozzle ) // 36
+    ( #calc" $Rnozzle*cos(M_PI/4.0)"     #calc"-$Rnozzle*cos(M_PI/4.0)"   $Snozzle ) // 37
+    ( #calc" $Rnozzle*cos(M_PI/4.0)"     #calc" $Rnozzle*cos(M_PI/4.0)"   $Snozzle ) // 38
+    ( #calc"-$Rnozzle*cos(M_PI/4.0)"     #calc" $Rnozzle*cos(M_PI/4.0)"   $Snozzle ) // 39
+
+// Hot section 1st
+    ( #calc"-$RhotSq*cos(M_PI/4.0)"     #calc"-$RhotSq*cos(M_PI/4.0)"     $Ltube ) // 40
+    ( #calc" $RhotSq*cos(M_PI/4.0)"     #calc"-$RhotSq*cos(M_PI/4.0)"     $Ltube ) // 41
+    ( #calc" $RhotSq*cos(M_PI/4.0)"     #calc" $RhotSq*cos(M_PI/4.0)"     $Ltube ) // 42
+    ( #calc"-$RhotSq*cos(M_PI/4.0)"     #calc" $RhotSq*cos(M_PI/4.0)"     $Ltube ) // 43
+    
+    ( #calc"-$RcoldHot*cos(M_PI/4.0)"   #calc"-$RcoldHot*cos(M_PI/4.0)"   $Ltube ) // 44
+    ( #calc" $RcoldHot*cos(M_PI/4.0)"   #calc"-$RcoldHot*cos(M_PI/4.0)"   $Ltube ) // 45
+    ( #calc" $RcoldHot*cos(M_PI/4.0)"   #calc" $RcoldHot*cos(M_PI/4.0)"   $Ltube ) // 46
+    ( #calc"-$RcoldHot*cos(M_PI/4.0)"   #calc" $RcoldHot*cos(M_PI/4.0)"   $Ltube ) // 47
+
+    ( #calc"-$RtubeHot*cos(M_PI/4.0)"   #calc"-$RtubeHot*cos(M_PI/4.0)"   $Ltube ) // 48
+    ( #calc" $RtubeHot*cos(M_PI/4.0)"   #calc"-$RtubeHot*cos(M_PI/4.0)"   $Ltube ) // 49
+    ( #calc" $RtubeHot*cos(M_PI/4.0)"   #calc" $RtubeHot*cos(M_PI/4.0)"   $Ltube ) // 50
+    ( #calc"-$RtubeHot*cos(M_PI/4.0)"   #calc" $RtubeHot*cos(M_PI/4.0)"   $Ltube ) // 51
+
+// Hot section 2nd
+    ( #calc"-$RhotSq*cos(M_PI/4.0)"     #calc"-$RhotSq*cos(M_PI/4.0)"     $Lhot ) // 52
+    ( #calc" $RhotSq*cos(M_PI/4.0)"     #calc"-$RhotSq*cos(M_PI/4.0)"     $Lhot ) // 53
+    ( #calc" $RhotSq*cos(M_PI/4.0)"     #calc" $RhotSq*cos(M_PI/4.0)"     $Lhot ) // 54
+    ( #calc"-$RhotSq*cos(M_PI/4.0)"     #calc" $RhotSq*cos(M_PI/4.0)"     $Lhot ) // 55
+    
+    ( #calc"-$RcoldHot*cos(M_PI/4.0)"   #calc"-$RcoldHot*cos(M_PI/4.0)"   $Lhot ) // 56
+    ( #calc" $RcoldHot*cos(M_PI/4.0)"   #calc"-$RcoldHot*cos(M_PI/4.0)"   $Lhot ) // 57
+    ( #calc" $RcoldHot*cos(M_PI/4.0)"   #calc" $RcoldHot*cos(M_PI/4.0)"   $Lhot ) // 58
+    ( #calc"-$RcoldHot*cos(M_PI/4.0)"   #calc" $RcoldHot*cos(M_PI/4.0)"   $Lhot ) // 59
+
+    ( #calc"-$RtubeHot*cos(M_PI/4.0)"   #calc"-$RtubeHot*cos(M_PI/4.0)"   $Lhot ) // 60
+    ( #calc" $RtubeHot*cos(M_PI/4.0)"   #calc"-$RtubeHot*cos(M_PI/4.0)"   $Lhot ) // 61
+    ( #calc" $RtubeHot*cos(M_PI/4.0)"   #calc" $RtubeHot*cos(M_PI/4.0)"   $Lhot ) // 62
+    ( #calc"-$RtubeHot*cos(M_PI/4.0)"   #calc" $RtubeHot*cos(M_PI/4.0)"   $Lhot ) // 63
+
+);
+
+blocks
+(
+
+// Cold diffuser
+    hex ( 0  1  2  3  8  9  10 11 ) ( $SqElem      $SqElem   $LcoldElem ) simpleGrading ( 1 1 1 )
+    hex ( 1  5  6  2  9  13 14 10 ) ( $RcoldElem   $SqElem   $LcoldElem ) simpleGrading ( 1 1 1 )
+    hex ( 2  6  7  3  10 14 15 11 ) ( $RcoldElem   $SqElem   $LcoldElem ) simpleGrading ( 1 1 1 )
+    hex ( 4  0  3  7  12 8  11 15 ) ( $RcoldElem   $SqElem   $LcoldElem ) simpleGrading ( 1 1 1 )
+    hex ( 5  1  0  4  13 9  8  12 ) ( $RcoldElem   $SqElem   $LcoldElem ) simpleGrading ( 1 1 1 )
+
+// Nozzle
+    hex ( 8  9  10 11 24 25 26 27 ) ( $SqElem      $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 8  12 13 9  24 28 29 25 ) ( $RcoldElem   $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 9  13 14 10 25 29 30 26 ) ( $RcoldElem   $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 10 14 15 11 26 30 31 27 ) ( $RcoldElem   $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 11 15 12 8  27 31 28 24 ) ( $RcoldElem   $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+
+    hex ( 12 16 17 13 28 32 33 29 ) ( $RtubeElem   $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 13 17 18 14 29 33 34 30 ) ( $RtubeElem   $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 14 18 19 15 30 34 35 31 ) ( $RtubeElem   $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 15 19 16 12 31 35 32 28 ) ( $RtubeElem   $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+
+    hex ( 16 20 21 17 32 36 37 33 ) ( $RnozElem    $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 17 21 22 18 33 37 38 34 ) ( $RnozElem    $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 18 22 23 19 34 38 39 35 ) ( $RnozElem    $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+    hex ( 19 23 20 16 35 39 36 32 ) ( $RnozElem    $SqElem   $LnozzleElem ) simpleGrading ( 1 1 1 )
+
+// Tube
+    hex ( 24 25 26 27 40 41 42 43 ) ( $SqElem      $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+    hex ( 24 28 29 25 40 44 45 41 ) ( $RcoldElem   $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+    hex ( 25 29 30 26 41 45 46 42 ) ( $RcoldElem   $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+    hex ( 26 30 31 27 42 46 47 43 ) ( $RcoldElem   $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+    hex ( 27 31 28 24 43 47 44 40 ) ( $RcoldElem   $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+
+    hex ( 28 32 33 29 44 48 49 45 ) ( $RtubeElem   $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+    hex ( 29 33 34 30 45 49 50 46 ) ( $RtubeElem   $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+    hex ( 30 34 35 31 46 50 51 47 ) ( $RtubeElem   $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+    hex ( 31 35 32 28 47 51 48 44 ) ( $RtubeElem   $SqElem   $LtubeElem ) simpleGrading ( 1 1 1 )
+
+// Hot outlet
+    hex ( 40 41 42 43 52 53 54 55 ) ( $SqElem      $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+    hex ( 40 44 45 41 52 56 57 53 ) ( $RcoldElem   $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+    hex ( 41 45 46 42 53 57 58 54 ) ( $RcoldElem   $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+    hex ( 42 46 47 43 54 58 59 55 ) ( $RcoldElem   $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+    hex ( 43 47 44 40 55 59 56 52 ) ( $RcoldElem   $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+
+    hex ( 44 48 49 45 56 60 61 57 ) ( $RtubeElem   $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+    hex ( 45 49 50 46 57 61 62 58 ) ( $RtubeElem   $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+    hex ( 46 50 51 47 58 62 63 59 ) ( $RtubeElem   $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+    hex ( 47 51 48 44 59 63 60 56 ) ( $RtubeElem   $SqElem   $LhotElem ) simpleGrading ( 1 1 1 )
+
+);
+
+edges
+(
+
+// Cold section
+    arc  4   5   ( 0.0                 #calc"-$Rcold"      #calc"-$Lcold" )
+    arc  5   6   ( $Rcold              0.0                 #calc"-$Lcold" )
+    arc  6   7   ( 0.0                 $Rcold              #calc"-$Lcold" )
+    arc  7   4   ( #calc"-$Rcold"      0.0                 #calc"-$Lcold" )
+
+// Nozzle section 1st
+    arc  12  13  ( 0.0                 #calc"-$Rcold"      0.0 )
+    arc  13  14  ( $Rcold              0.0                 0.0 )
+    arc  14  15  ( 0.0                 $Rcold              0.0 )
+    arc  15  12  ( #calc"-$Rcold"      0.0                 0.0 )
+
+    arc  16  17  ( 0.0                 #calc"-$Rtube"      0.0 )
+    arc  17  18  ( $Rtube              0.0                 0.0 )
+    arc  18  19  ( 0.0                 $Rtube              0.0 )
+    arc  19  16  ( #calc"-$Rtube"      0.0                 0.0 )
+
+    arc  20  21  ( 0.0                 #calc"-$Rnozzle"    0.0 )
+    arc  21  22  ( $Rnozzle            0.0                 0.0 )
+    arc  22  23  ( 0.0                 $Rnozzle            0.0 )
+    arc  23  20  ( #calc"-$Rnozzle"    0.0                 0.0 )
+
+// Nozzle section 2nd
+    arc  28  29  ( 0.0                 #calc"-$Rcold"      $Snozzle )
+    arc  29  30  ( $Rcold              0.0                 $Snozzle )
+    arc  30  31  ( 0.0                 $Rcold              $Snozzle )
+    arc  31  28  ( #calc"-$Rcold"      0.0                 $Snozzle )
+
+    arc  32  33  ( 0.0                 #calc"-$Rtube"      $Snozzle )
+    arc  33  34  ( $Rtube              0.0                 $Snozzle )
+    arc  34  35  ( 0.0                 $Rtube              $Snozzle )
+    arc  35  32  ( #calc"-$Rtube"      0.0                 $Snozzle )
+
+    arc  36  37  ( 0.0                 #calc"-$Rnozzle"    $Snozzle )
+    arc  37  38  ( $Rnozzle            0.0                 $Snozzle )
+    arc  38  39  ( 0.0                 $Rnozzle            $Snozzle )
+    arc  39  36  ( #calc"-$Rnozzle"    0.0                 $Snozzle )
+
+// Hot section 1st
+    arc  44  45  ( 0.0                 #calc"-$RcoldHot"   $Ltube )
+    arc  45  46  ( $RcoldHot           0.0                 $Ltube )
+    arc  46  47  ( 0.0                 $RcoldHot           $Ltube )
+    arc  47  44  ( #calc"-$RcoldHot"   0.0                 $Ltube )
+
+    arc  48  49  ( 0.0                 #calc"-$RtubeHot"   $Ltube )
+    arc  49  50  ( $RtubeHot           0.0                 $Ltube )
+    arc  50  51  ( 0.0                 $RtubeHot           $Ltube )
+    arc  51  48  ( #calc"-$RtubeHot"   0.0                 $Ltube )
+
+// Hot section 2nd
+    arc  56  57  ( 0.0                 #calc"-$RcoldHot"   $Lhot )
+    arc  57  58  ( $RcoldHot           0.0                 $Lhot )
+    arc  58  59  ( 0.0                 $RcoldHot           $Lhot )
+    arc  59  56  ( #calc"-$RcoldHot"   0.0                 $Lhot )
+
+    arc  60  61  ( 0.0                 #calc"-$RtubeHot"   $Lhot )
+    arc  61  62  ( $RtubeHot           0.0                 $Lhot )
+    arc  62  63  ( 0.0                 $RtubeHot           $Lhot )
+    arc  63  60  ( #calc"-$RtubeHot"   0.0                 $Lhot )
+
+);
+
+boundary
+(
+
+    INLET
+    {
+        type patch;
+        faces
+        (
+            ( 21 22 38 37 )
+            ( 22 23 39 38 )
+            ( 23 20 36 39 )
+            ( 20 21 37 36 )
+        );
+    }
+
+    COLD
+    {
+        type patch;
+        faces
+        (
+            ( 3  2  1  0  )
+            ( 0  1  5  4  )
+            ( 1  2  6  5  )
+            ( 2  3  7  6  )
+            ( 0  4  7  3  )
+        );
+    }
+
+    HOT
+    {
+        type patch;
+        faces
+        (
+            ( 48 49 61 60 )
+            ( 49 50 62 61 )
+            ( 50 51 63 62 )
+            ( 51 48 60 63 )
+        );
+    }
+
+    WALL
+    {
+        type wall;
+        faces
+        (
+            ( 4  5  13 12 )
+            ( 5  6  14 13 )
+            ( 6  7  15 14 )
+            ( 7  4  12 15 )
+
+            ( 12 13 17 16 )
+            ( 13 14 18 17 )
+            ( 14 15 19 18 )
+            ( 12 16 19 15 )
+            ( 16 17 21 20 )
+            ( 17 18 22 21 )
+            ( 18 19 23 22 )
+            ( 16 20 23 19 )
+
+            ( 33 32 36 37 )
+            ( 33 37 38 34 )
+            ( 34 38 39 35 )
+            ( 32 35 39 36 )
+
+            ( 32 33 49 48 )
+            ( 33 34 50 49 )
+            ( 34 35 51 50 )
+            ( 35 32 48 51 )
+
+            ( 52 53 54 55 )
+            ( 52 56 57 53 )
+            ( 53 57 58 54 )
+            ( 54 58 59 55 )
+            ( 52 55 59 56 )
+            ( 56 60 61 57 )
+            ( 57 61 62 58 )
+            ( 58 62 63 59 )
+            ( 59 63 60 56 )
+        );
+    }
+
+);
+
+
+// ************************************************************************* //

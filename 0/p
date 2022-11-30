@@ -1,0 +1,55 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1812                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 220000;
+
+boundaryField
+{
+    INLET
+    {
+        type            vtPressure;
+        p1              220000;
+        p2              600000;
+        timeDelay       0.0;
+        deltaTimeRamp   0.001;
+        value           uniform 220000;
+    }
+
+    COLD
+    {
+        type            vtPressure;
+        p1              220000;
+        p2              100000;
+        timeDelay       0;
+        deltaTimeRamp   0.001;
+        value           uniform 220000;
+    }
+
+    HOT
+    {
+        type           zeroGradient;
+    }
+
+    "(WALL|nozzle)"
+    {
+        type            zeroGradient;
+    }
+}
+
+// ************************************************************************* //
+
